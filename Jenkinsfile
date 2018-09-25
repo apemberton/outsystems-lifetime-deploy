@@ -10,7 +10,7 @@ pipeline {
       stage('Retrieve Envs & Apps') {
         steps {
           powershell '.\\FetchLifeTimeData.ps1'   
-          echo "${LT_ENVIRONMENTS}"
+          echo "${env.LT_ENVIRONMENTS}"
         }
       }
       stage('Deploy') {
