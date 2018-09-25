@@ -24,16 +24,16 @@ pipeline {
       }
     }
     stage('Deploy') {
-      input {
-        message "Deploy to target environment?"
-        ok "Deploy"
-        parameters {
-          choice(name: 'SOURCE', choices: "${envProps['Environments']}", description: 'Source Environment')
-          choice(name: 'TARGET', choices: "${envProps['Environments']}", description: 'Target Environment')
-          choice(name: 'APPLICATION', choices: "${env.LT_APPLICATIONS}", description: 'Applications')
-        }
-      }
       steps {
+        input {
+          message "Deploy to target environment?"
+          ok "Deploy"
+          parameters {
+            choice(name: 'SOURCE', choices: "${envProps['Environments']}", description: 'Source Environment')
+            choice(name: 'TARGET', choices: "${envProps['Environments']}", description: 'Target Environment')
+            choice(name: 'APPLICATION', choices: "${env.LT_APPLICATIONS}", description: 'Applications')
+          }
+        }
         powershell '.\\DeployToTargetEnv.ps1'
       }
     }
