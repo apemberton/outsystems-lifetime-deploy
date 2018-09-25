@@ -30,13 +30,13 @@ function CallDeploymentAPI ($Method, $Endpoint, $Body)
 # Fetch latest OS Environments data 
 $Environments = CallDeploymentAPI -Method GET -Endpoint environments 
 $Environments | Format-Table Name,Key > LT.Environments.mapping
-"Environments=" + ( ( $Environments | %{ $_.Name } | Sort-Object ) -join "," ) | Out-File LT.Environments.properties -Encoding Default
-$env:LT_ENVIRONMENTS = ( $Environments | %{ $_.Name } | Sort-Object ) -join "`n"
+"Environments=" + ( ( $Environments | %{ $_.Name } | Sort-Object ) -join "`n" ) | Out-File LT.Environments.properties -Encoding Default
+[Environment]::SetEnvironmentVariable("LT_ENVIRONMENTS", ( $Environments | %{ $_.Name } | Sort-Object ) -join "`n", "Machine")
 echo "OS Environments data retrieved successfully."
 
 # Fetch latest OS Applications data
 $Applications = CallDeploymentAPI -Method GET -Endpoint applications 
 $Applications | Format-Table Name,Key > LT.Applications.mapping
-"Applications=" + ( ( $Applications | %{ $_.Name } | Sort-Object ) -join "," ) | Out-File LT.Applications.properties -Encoding Default
+"Applications=" + ( ( $Applications | %{ $_.Name } | Sort-Object ) -join "`n" ) | Out-File LT.Applications.properties -Encoding Default
 $env:LT_APPLICATIONS = ( $Applications | %{ $_.Name } | Sort-Object ) -join "`n"
 echo "OS Applications data retrieved successfully."
