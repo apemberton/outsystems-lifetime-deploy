@@ -1,3 +1,5 @@
+def envProps
+def appProps
 pipeline {
   agent { label 'windows' }
   options { 
@@ -14,8 +16,8 @@ pipeline {
       steps {
         powershell '.\\FetchLifeTimeData.ps1'  
         script {
-          def envProps = readProperties file: 'LT.Environments.properties'
-          def appProps = readProperties file: 'LT.Applications.properties'
+          envProps = readProperties file: 'LT.Environments.properties'
+          appProps = readProperties file: 'LT.Applications.properties'
 
         }
       }
