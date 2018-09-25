@@ -15,6 +15,7 @@ pipeline {
       steps {
         powershell '.\\FetchLifeTimeData.ps1'  
         powershell 'ls'
+        powershell 'echo $env:LT_ENVIRONMENTS'
         script {
           envProps = readProperties file: 'LT.Environments.properties'
 
