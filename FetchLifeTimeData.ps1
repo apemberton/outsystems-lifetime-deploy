@@ -2,9 +2,9 @@
 <#       Script: FetchLifeTimeData                                                 #>
 <#  Description: Fetch the latest Application and Environment data in LifeTime     #>
 <#               for invoking the Deployment API.                                  #>
-<#         Date: 2017-10-05                                                        #>
-<#       Author: rrmendes                                                          #>
-<#         Path: jenkins/scripts/powershell/FetchLifeTimeData.ps1                  #>
+<#         Date: 2018-09-29                                                        #>
+<#       Author: rrmendes, kmadel                                                  #>
+<#         Path: FetchLifeTimeData.ps1                  			   #>
 <###################################################################################>
 
 <###################################################################################>
