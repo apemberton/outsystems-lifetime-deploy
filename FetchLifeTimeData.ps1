@@ -16,10 +16,10 @@
 <###################################################################################>
 function CallDeploymentAPI ($Method, $Endpoint, $Body)
 {
-	$Url = "https://$env:LifeTimeUrl/LifeTimeAPI/rest/v1/$Endpoint"
+	$Url = "https://$env:LT_URL/LifeTimeAPI/rest/v1/$Endpoint"
 	$ContentType = "application/json"
 	$Headers = @{
-		Authorization = "Bearer $env:AuthorizationToken"
+		Authorization = "Bearer $env:AUTH_TOKEN"
 		Accept = "application/json"
 	}
 		
