@@ -1,4 +1,4 @@
-dev envProps = []
+def envProps = []
 pipeline {
   agent { label 'windows' }
   options { 
