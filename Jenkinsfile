@@ -19,11 +19,18 @@ pipeline {
         script {
           envProps = readProperties file: 'LT.Environments.properties'
           appProps = readProperties file: 'LT.Applications.properties'
-
+          env.ENVIRONMENTS_FROM_PIPE = envProps['Environments']
         }
       }
     }
     stage('Deploy') {
+      input {
+        message "Deploy to target environment?"
+        ok "Deploy"
+        parameters {
+          choice(name: 'SOURCE', choices: "${env.ENVIRONMENTS_FROM_PIPE}", description: 'Source Environment')
+        }
+      }
       steps {
         script {
           def userInput = input message: 'Deploy to target environment?', ok: 'Deploy', 
