@@ -60,8 +60,8 @@ echo "Deployment plan '$DeploymentPlanKey' started being executed."
 # Sleep thread until deployment has finished
 $WaitCounter = 0
 do {
-	Start-Sleep -s $env:SleepPeriodInSecs
-	$WaitCounter += $env:SleepPeriodInSecs
+	Start-Sleep -s $env:SLEEP_SECONDS
+	$WaitCounter += $env:SLEEP_SECONDS
 	echo "$WaitCounter secs have passed since the deployment started..."	
 	
 	# Check Deployment Plan status. If deployment is still running then go back to step 5
@@ -73,7 +73,7 @@ do {
 		exit 0
 	}
 }
-while ($WaitCounter -lt $env:DeploymentTimeoutInSecs)
+while ($WaitCounter -lt $env:DEPLOYMENT_TIMEOUT)
 
 # Deployment timeout reached. Exit script with error  
 echo "Timeout occurred while deployment plan is still in 'running' status."
