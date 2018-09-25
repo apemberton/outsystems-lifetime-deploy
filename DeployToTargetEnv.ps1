@@ -30,7 +30,7 @@ $SOURCE = $env:SOURCE
 $TARGET = $env:TARGET
 $APPLICATION = $env:APPLICATION
 # Translate environment names to the corresponding keys
-$SourceEnvKey = Select-String "$SOURCE]\s+([\w-]+)" $env:WORKSPACE\LT.Environments.mapping -list | %{ $_.Matches.Groups[1].Value }
+$SourceEnvKey = Select-String "$SOURCE\s+([\w-]+)" $env:WORKSPACE\LT.Environments.mapping -list | %{ $_.Matches.Groups[1].Value }
 $TargetEnvKey = Select-String "$TARGET\s+([\w-]+)" $env:WORKSPACE\LT.Environments.mapping -list | %{ $_.Matches.Groups[1].Value }
 
 # Translate application names to the corresponding keys
