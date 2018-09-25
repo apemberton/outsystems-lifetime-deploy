@@ -13,7 +13,11 @@ pipeline {
     stages {
       stage('Retrieve Envs & Apps') {
         steps {
-          powershell '.\\FetchLifeTimeData.ps1'   
+          powershell '.\\FetchLifeTimeData.ps1'  
+          script {
+            def envProps = readProperties file: 'LT.Environments.properties'
+            env.LT_ENVIRONMENTS = envProps['environments']
+          }
           echo "${env.LT_ENVIRONMENTS}"
         }
       }
