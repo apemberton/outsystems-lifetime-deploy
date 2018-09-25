@@ -2,9 +2,9 @@
 <#       Script: DeployLatestTagsToTargetEnv                                       #>
 <#  Description: Deploy to target environment the latest tags of configured        #>
 <#               LifeTime applications.                                            #>
-<#         Date: 2017-10-06                                                        #>
-<#       Author: rrmendes                                                          #>
-<#         Path: jenkins/scripts/powershell/DeployLatestTagsToTargetEnv.ps1        #>
+<#         Date: 2018-09-25                                                        #>
+<#       Author: rrmendes, kmadel                                                  #>
+<#         Path: DeployLatestTagsToTargetEnv.ps1        			   #>
 <###################################################################################>
 
 <###################################################################################>
