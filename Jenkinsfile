@@ -15,10 +15,10 @@ pipeline {
         steps {
           powershell '.\\FetchLifeTimeData.ps1'  
           script {
-            def envProps = readProperties file: 'LT.Environments.properties'
+            def envProps = readProperties file: '.\LT.Environments.properties'
             env.LT_ENVIRONMENTS = envProps['Environments']
           }
-          echo "${envProps['Environments']}"
+          echo "${env.LT_ENVIRONMENTS}"
         }
       }
       stage('Deploy') {
