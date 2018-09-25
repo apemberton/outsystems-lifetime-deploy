@@ -16,10 +16,10 @@
 <###################################################################################>
 function CallDeploymentAPI ($Method, $Endpoint, $Body)
 {
-	$Url = "https://$env:LifeTimeUrl/LifeTimeAPI/rest/v1/$Endpoint"
+	$Url = "https://$env:LT_URL/LifeTimeAPI/rest/v1/$Endpoint"
 	$ContentType = "application/json"
 	$Headers = @{
-		Authorization = "Bearer $env:AuthorizationToken"
+		Authorization = "Bearer $env:AUTH_TOKEN"
 		Accept = "application/json"
 	}
 	
@@ -28,11 +28,11 @@ function CallDeploymentAPI ($Method, $Endpoint, $Body)
 }	
 
 # Translate environment names to the corresponding keys
-$SourceEnvKey = Select-String "$env:SourceEnvironment\s+([\w-]+)" $env:WORKSPACE\LT.Environments.mapping -list | %{ $_.Matches.Groups[1].Value }
-$TargetEnvKey = Select-String "$env:TargetEnvironment\s+([\w-]+)" $env:WORKSPACE\LT.Environments.mapping -list | %{ $_.Matches.Groups[1].Value }
+$SourceEnvKey = Select-String "$SOURCE\s+([\w-]+)" $env:WORKSPACE\LT.Environments.mapping -list | %{ $_.Matches.Groups[1].Value }
+$TargetEnvKey = Select-String "$TARGET\s+([\w-]+)" $env:WORKSPACE\LT.Environments.mapping -list | %{ $_.Matches.Groups[1].Value }
 
 # Translate application names to the corresponding keys
-$AppKeys = ( $env:ApplicationsToDeploy -split "," | %{ Select-String "$_\s+([\w-]+)" $env:WORKSPACE\LT.Applications.mapping -list | %{ $_.Matches.Groups[1].Value } } ) -join ","
+$AppKeys = ( $APPLICATIONS -split "," | %{ Select-String "$_\s+([\w-]+)" $env:WORKSPACE\LT.Applications.mapping -list | %{ $_.Matches.Groups[1].Value } } ) -join ","
 echo "Creating deployment plan from '$env:SourceEnvironment' ($SourceEnvKey) to '$env:TargetEnvironment' ($TargetEnvKey) including applications: $env:ApplicationsToDeploy ($AppKeys)."
 
 # Get latest version Tags for each OS Application to deploy
