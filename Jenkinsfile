@@ -2,7 +2,9 @@ pipeline {
   agent { label 'windows' }
   environment {
     LT_URL = 'ap-demo-dev.outsystemscloud.com' 
-    AUTH_TOKEN = credentials('lt-auth-token')                    
+    AUTH_TOKEN = credentials('lt-auth-token')     
+    LT_ENVIRONMENTS = ""
+    LT_APPLICATIONS=""
   }
     stages {
             stage('Retrieve Envs & Apps') {
