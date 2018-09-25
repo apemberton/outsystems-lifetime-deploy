@@ -1,5 +1,9 @@
 pipeline {
   agent { label 'windows' }
+  options { 
+    buildDiscarder(logRotator(numToKeepStr: '5')) 
+    disableConcurrentBuilds()
+  }
   environment {
     LT_URL = 'ap-demo-dev.outsystemscloud.com' 
     AUTH_TOKEN = credentials('lt-auth-token')     
