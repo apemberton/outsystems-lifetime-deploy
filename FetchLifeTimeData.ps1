@@ -33,7 +33,7 @@ $Environments | Format-Table Name,Key > LT.Environments.mapping
 "Environments=" + ( ( $Environments | %{ $_.Name } | Sort-Object ) -join "`\n" ) | Out-File LT.Environments.properties -Encoding Default
 $ltEnvironments = ( $Environments | %{ $_.Name } | Sort-Object ) -join "`\n"
 [Environment]::SetEnvironmentVariable("LT_ENVIRONMENTS", $ltEnvironments, "User")
-echo "OS Environments data - $ltEnvironments - retrieved successfully."
+echo "OS Environments data - $env:LT_ENVIRONMENTS - retrieved successfully."
 
 # Fetch latest OS Applications data
 $Applications = CallDeploymentAPI -Method GET -Endpoint applications 
