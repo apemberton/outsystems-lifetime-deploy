@@ -24,12 +24,13 @@ pipeline {
     stage('Deploy') {
       steps {
         script {
-          def userInput = input message: 'Deploy to target environment?', ok: 'Deploy', id: 'userInput', 
+          def userInput = input message: 'Deploy to target environment?', ok: 'Deploy', 
             parameters: [choice(choices: "${envProps['Environments']}", description: 'Source Environment', name: 'SOURCE'),
                         choice(choices: "${envProps['Environments']}", description: 'Target Environment', name: 'TARGET'),
                         choice(choices: "${appProps['Applications']}", description: 'Applications', name: 'APPLICATION')]
+          echo "${userInput.SOURCE}"
         }
-        echo "${userInput.SOURCE}"
+        
         powershell ".\\DeployToTargetEnv.ps1"
       }
     }
