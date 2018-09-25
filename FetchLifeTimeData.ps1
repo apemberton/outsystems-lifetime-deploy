@@ -31,8 +31,9 @@ function CallDeploymentAPI ($Method, $Endpoint, $Body)
 $Environments = CallDeploymentAPI -Method GET -Endpoint environments 
 $Environments | Format-Table Name,Key > LT.Environments.mapping
 "Environments=" + ( ( $Environments | %{ $_.Name } | Sort-Object ) -join "`\n" ) | Out-File LT.Environments.properties -Encoding Default
-[Environment]::SetEnvironmentVariable("LT_ENVIRONMENTS", ( $Environments | %{ $_.Name } | Sort-Object ) -join "`\n", "User")
-echo "OS Environments data retrieved successfully."
+$ltEnvironments = ( $Environments | %{ $_.Name } | Sort-Object ) -join "`\n"
+[Environment]::SetEnvironmentVariable("LT_ENVIRONMENTS", $ltEnvironments, "User")
+echo "OS Environments data - $ltEnvironments - retrieved successfully."
 
 # Fetch latest OS Applications data
 $Applications = CallDeploymentAPI -Method GET -Endpoint applications 
