@@ -9,7 +9,6 @@ pipeline {
   environment {
     LT_URL = 'ap-demo-dev.outsystemscloud.com' 
     AUTH_TOKEN = credentials('lt-auth-token')
-    LT_APPLICATIONS= ""
   }
   stages {
     stage('Retrieve Envs & Apps') {
@@ -27,8 +26,8 @@ pipeline {
         input message: 'Deploy to target environment?', ok: 'Deploy', 
           parameters: [choice(choices: "${envProps['Environments']}", description: 'Source Environment', name: 'SOURCE'),
                       choice(choices: "${envProps['Environments']}", description: 'Target Environment', name: 'TARGET'),
-                      choice(choices: "${appProps['Applications']}", description: 'Applications', name: 'APPLICATIONS')]
-        powershell '.\\DeployToTargetEnv.ps1'
+                      choice(choices: "${appProps['Applications']}", description: 'Applications', name: 'APPLICATION')]
+        powershell ".\\DeployToTargetEnv.ps1"
       }
     }
   }
