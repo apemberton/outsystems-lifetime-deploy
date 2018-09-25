@@ -27,6 +27,8 @@ pipeline {
           parameters: [choice(choices: "${envProps['Environments']}", description: 'Source Environment', name: 'SOURCE'),
                       choice(choices: "${envProps['Environments']}", description: 'Target Environment', name: 'TARGET'),
                       choice(choices: "${appProps['Applications']}", description: 'Applications', name: 'APPLICATION')]
+        echo "${SOURCE}"
+        echo "${userInput['SOURCE']}"
         powershell ".\\DeployToTargetEnv.ps1"
       }
     }
