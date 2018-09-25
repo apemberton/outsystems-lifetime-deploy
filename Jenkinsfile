@@ -23,7 +23,7 @@ pipeline {
     }
     stage('Deploy') {
       steps {
-        input message: 'Deploy to target environment?', ok: 'Deploy', 
+        input message: 'Deploy to target environment?', ok: 'Deploy', id: 'userInput', 
           parameters: [choice(choices: "${envProps['Environments']}", description: 'Source Environment', name: 'SOURCE'),
                       choice(choices: "${envProps['Environments']}", description: 'Target Environment', name: 'TARGET'),
                       choice(choices: "${appProps['Applications']}", description: 'Applications', name: 'APPLICATION')]
