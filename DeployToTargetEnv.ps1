@@ -32,8 +32,8 @@ $SourceEnvKey = Select-String "$SOURCE\s+([\w-]+)" $env:WORKSPACE\LT.Environment
 $TargetEnvKey = Select-String "$TARGET\s+([\w-]+)" $env:WORKSPACE\LT.Environments.mapping -list | %{ $_.Matches.Groups[1].Value }
 
 # Translate application names to the corresponding keys
-$AppKeys = ( $APPLICATIONS -split "," | %{ Select-String "$_\s+([\w-]+)" $env:WORKSPACE\LT.Applications.mapping -list | %{ $_.Matches.Groups[1].Value } } ) -join ","
-echo "Creating deployment plan from '$env:SourceEnvironment' ($SourceEnvKey) to '$env:TargetEnvironment' ($TargetEnvKey) including applications: $env:ApplicationsToDeploy ($AppKeys)."
+$AppKeys = ( $APPLICATION -split "," | %{ Select-String "$_\s+([\w-]+)" $env:WORKSPACE\LT.Applications.mapping -list | %{ $_.Matches.Groups[1].Value } } ) -join ","
+echo "Creating deployment plan from '$SOURCE' ($SourceEnvKey) to '$TARGET' ($TargetEnvKey) including applications: $APPLICATION ($AppKeys)."
 
 # Get latest version Tags for each OS Application to deploy
 $AppVersionKeys = ( $AppKeys -split "," | %{ CallDeploymentAPI -Method GET -Endpoint "applications/$_/versions?MaximumVersionsToReturn=1" } | %{ '"' + $_.Key + '"' } ) -join ","
