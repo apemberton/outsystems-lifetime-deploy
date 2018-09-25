@@ -19,18 +19,11 @@ pipeline {
         script {
           envProps = readProperties file: 'LT.Environments.properties'
           appProps = readProperties file: 'LT.Applications.properties'
-          env.ENVIRONMENTS_FROM_PIPE = envProps['Environments']
+          echo "${env.LT_ENVIRONMENTS}"
         }
       }
     }
     stage('Deploy') {
-      input {
-        message "Deploy to target environment?"
-        ok "Deploy"
-        parameters {
-          choice(name: 'SOURCE', choices: "${env.ENVIRONMENTS_FROM_PIPE}", description: 'Source Environment')
-        }
-      }
       steps {
         script {
           echo "${env.ENVIRONMENTS_FROM_PIPE}"
