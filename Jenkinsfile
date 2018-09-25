@@ -9,6 +9,8 @@ pipeline {
   environment {
     LT_URL = 'ap-demo-dev.outsystemscloud.com' 
     AUTH_TOKEN = credentials('lt-auth-token')
+    SLEEP_SECONDS = 20
+    DEPLOYMENT_TIMEOUT = 300
   }
   stages {
     stage('Retrieve Envs & Apps') {
