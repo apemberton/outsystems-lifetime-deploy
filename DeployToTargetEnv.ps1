@@ -26,9 +26,9 @@ function CallDeploymentAPI ($Method, $Endpoint, $Body)
 	try { Invoke-RestMethod -Method $Method -Uri $Url -Headers $Headers -ContentType $ContentType -Body $body }
 	catch { Write-Host $_; exit 9 }
 }	
-$SOURCE = ${userInput['SOURCE']}
-$TARGET = ${userInput['TARGET']}
-$APPLICATION = ${userInput['APPLICATION']}
+$SOURCE = $env:SOURCE
+$TARGET = $env:TARGET
+$APPLICATION = $env:APPLICATION
 # Translate environment names to the corresponding keys
 $SourceEnvKey = Select-String "$SOURCE]\s+([\w-]+)" $env:WORKSPACE\LT.Environments.mapping -list | %{ $_.Matches.Groups[1].Value }
 $TargetEnvKey = Select-String "$TARGET\s+([\w-]+)" $env:WORKSPACE\LT.Environments.mapping -list | %{ $_.Matches.Groups[1].Value }
