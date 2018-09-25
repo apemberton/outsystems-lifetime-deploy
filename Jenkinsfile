@@ -19,7 +19,6 @@ pipeline {
         script {
           envProps = readProperties file: 'LT.Environments.properties'
           appProps = readProperties file: 'LT.Applications.properties'
-          echo "${env.LT_ENVIRONMENTS}"
         }
       }
     }
