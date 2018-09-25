@@ -17,7 +17,9 @@ pipeline {
           powershell 'ls'
           script {
             def envProps = readProperties file: 'LT.Environments.properties'
+            echo "${envProps['Environments']}"
             env.LT_ENVIRONMENTS = envProps['Environments']
+            
           }
           echo "${env.LT_ENVIRONMENTS}"
         }
