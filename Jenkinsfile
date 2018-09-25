@@ -1,4 +1,3 @@
-def envProps = []
 pipeline {
   agent { label 'windows' }
   options { 
@@ -14,19 +13,19 @@ pipeline {
     stage('Retrieve Envs & Apps') {
       steps {
         powershell '.\\FetchLifeTimeData.ps1'  
-        powershell 'ls'
-        powershell "echo ${env.LT_ENVIRONMENTS}"
         script {
-          envProps = readProperties file: 'LT.Environments.properties'
+          def envProps = readProperties file: 'LT.Environments.properties'
+          def appProps = readProperties file: 'LT.Applications.properties'
 
         }
-        echo "${envProps['Environments']}"
       }
     }
     stage('Deploy') {
       steps {
         input message: 'Deploy to target environment?', ok: 'Deploy', 
-          parameters: [choice(choices: "${envProps['Environments']}", description: 'Source Environment', name: 'SOURCE')]
+          parameters: [choice(choices: "${envProps['Environments']}", description: 'Source Environment', name: 'SOURCE'),
+                      choice(choices: "${envProps['Environments']}", description: 'Target Environment', name: 'TARGET'),
+                      choice(choices: "${appProps['Applications']}", description: 'Applications', name: 'APPLICATIONS')]
         powershell '.\\DeployToTargetEnv.ps1'
       }
     }
