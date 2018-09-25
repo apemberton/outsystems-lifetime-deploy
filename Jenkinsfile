@@ -7,12 +7,13 @@ pipeline {
     LT_APPLICATIONS=""
   }
     stages {
-            stage('Retrieve Envs & Apps') {
-                steps {
-                    powershell '.\\FetchLifeTimeData.ps1'   
-                }
-            }
-            stage('Deploy') {
+      stage('Retrieve Envs & Apps') {
+        steps {
+          powershell '.\\FetchLifeTimeData.ps1'   
+          echo "${LT_ENVIRONMENTS}
+        }
+      }
+      stage('Deploy') {
               input {
                 message "Deploy to target environment?"
                 ok "Deploy"
