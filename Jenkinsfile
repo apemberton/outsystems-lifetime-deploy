@@ -17,9 +17,9 @@ pipeline {
                 message "Deploy to target environment?"
                 ok "Deploy"
                 parameters {
-                  choice(name: 'SOURCE', choices: "${LT_ENVIRONMENTS}", description: 'Source Environment')
-                  choice(name: 'TARGET', choices: "${LT_ENVIRONMENTS}", description: 'Target Environment')
-                  choice(name: 'APPLICATION', choices: "${LT_APPLICATIONS}", description: 'Applications')
+                  choice(name: 'SOURCE', choices: "${env.LT_ENVIRONMENTS}", description: 'Source Environment')
+                  choice(name: 'TARGET', choices: "${env.LT_ENVIRONMENTS}", description: 'Target Environment')
+                  choice(name: 'APPLICATION', choices: "${env.LT_APPLICATIONS}", description: 'Applications')
                 }
               }
               steps {
