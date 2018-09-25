@@ -18,7 +18,7 @@ pipeline {
             def envProps = readProperties file: 'LT.Environments.properties'
             env.LT_ENVIRONMENTS = envProps['environments']
           }
-          echo "${env.LT_ENVIRONMENTS}"
+          echo "${envProps['environments']}"
         }
       }
       stage('Deploy') {
