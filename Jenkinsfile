@@ -26,7 +26,6 @@ pipeline {
     stage('Deploy') {
       steps {
         script {
-          echo "${env.ENVIRONMENTS_FROM_PIPE}"
           def userInput = input message: 'Deploy to target environment?', ok: 'Deploy', 
             parameters: [choice(choices: "${envProps['Environments']}", description: 'Source Environment', name: 'SOURCE'),
                         choice(choices: "${envProps['Environments']}", description: 'Target Environment', name: 'TARGET'),
