@@ -5,7 +5,7 @@ pipeline {
   options { 
     buildDiscarder(logRotator(numToKeepStr: '5')) 
     disableConcurrentBuilds()
-    timeout(time: 10, unit: 'SECONDS')
+    timeout(time: 20, unit: 'SECONDS')
   }
   environment {
     LT_URL = 'ap-demo-dev.outsystemscloud.com' 
